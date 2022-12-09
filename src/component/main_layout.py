@@ -6,6 +6,7 @@
 import dash
 import dash_bootstrap_components as dbc
 from dash_bootstrap_templates import ThemeSwitchAIO
+from src.component import ids
 
 # figure templates
 template_theme1 = "sketchy"
@@ -35,12 +36,43 @@ def create_layout(app: dash.Dash) -> dbc.Container:
         class_name="bg-light",
     )
 
+    offcanvas = dash.html.Div(
+        [
+            dbc.Button(
+                "About Me",
+                id=ids.ABOUT_ME,
+                n_clicks=0,
+            ),
+            dbc.Offcanvas(
+                dash.html.P("The contents on the main page are now scrollable."),
+                id="offcanvas-scrollable",
+                scrollable=True,
+                title="About Me",
+                is_open=False,
+            ),
+        ]
+    )
+
+    @app.callback(
+        dash.Output("offcanvas-scrollable", "is_open"),
+        dash.Input(ids.ABOUT_ME, "n_clicks"),
+        dash.State("offcanvas-scrollable", "is_open"),
+    )
+    def toggle_offcanvas_scrollable(n1, is_open):
+        if n1:
+            return not is_open
+        return is_open
+
     return dbc.Container([
         dbc.Row([
-            dbc.Col(dash.html.Div("Learn ML in an interactive way",
-                                  style={'fontSize': 50, 'textAlign': 'center'})),
-            ThemeSwitchAIO(aio_id="theme", themes=[url_theme1, url_theme2], ),
-        ]),
+            dbc.Col([offcanvas], align="end"),
+            dbc.Col([
+                     dash.html.Div("Learn ML in an interactive way",
+                                   style={'fontSize': 50, 'textAlign': 'center'}),
+                     ], align="center"),
+            dbc.Col([ThemeSwitchAIO(aio_id="theme", themes=[url_theme1, url_theme2])], align="end"),
+
+        ], justify="evenly"),
 
         dash.html.Hr(),
 
