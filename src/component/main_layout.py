@@ -5,6 +5,15 @@
 
 import dash
 import dash_bootstrap_components as dbc
+from dash_bootstrap_templates import ThemeSwitchAIO
+
+# figure templates
+template_theme1 = "sketchy"
+template_theme2 = "cyborg"
+
+# themes
+url_theme1 = dbc.themes.SKETCHY
+url_theme2 = dbc.themes.DARKLY
 
 
 def create_layout(app: dash.Dash) -> dbc.Container:
@@ -12,7 +21,7 @@ def create_layout(app: dash.Dash) -> dbc.Container:
         [
             dbc.NavLink(
                 [
-                    dash.html.Div(page["name"], class_name="ms-2"),
+                    dash.html.Div(page["name"], className="ms-2"),
                 ],
                 href=page["path"],
                 # "exact" to automatically set the active property when the current pathname matches the href
@@ -29,7 +38,8 @@ def create_layout(app: dash.Dash) -> dbc.Container:
     return dbc.Container([
         dbc.Row([
             dbc.Col(dash.html.Div("Learn ML in an interactive way",
-                                  style={'fontSize': 50, 'textAlign': 'center'}))
+                                  style={'fontSize': 50, 'textAlign': 'center'})),
+            ThemeSwitchAIO(aio_id="theme", themes=[url_theme1, url_theme2], ),
         ]),
 
         dash.html.Hr(),
