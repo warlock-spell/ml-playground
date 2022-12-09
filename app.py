@@ -3,14 +3,16 @@
 # @Author:      Daksh
 # @Time:        09-12-2022 03:48 pm
 
-from dash import Dash, html
-
+import dash
+from dash import Dash
+from src.component.main_layout import create_layout
+import dash_bootstrap_components as dbc
 
 
 def main() -> None:
-    app = Dash()
+    app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.CYBORG])
     app.title = "Learn ML"
-    app.layout = html.Div("Learn ML")
+    app.layout = create_layout(app)
     app.run(debug=True)
 
 
