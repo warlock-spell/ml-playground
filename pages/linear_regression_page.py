@@ -5,8 +5,9 @@
 
 import dash
 from dash import dcc, html
+from src.component.page_layout import create_page_layout
 
 dash.register_page(__name__)
 
 
-layout = html.Div("Linear Regression")
+layout = create_page_layout()
