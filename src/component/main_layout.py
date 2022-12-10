@@ -7,6 +7,7 @@ import dash
 import dash_bootstrap_components as dbc
 from dash_bootstrap_templates import ThemeSwitchAIO
 from src.component.offcanvas_about_me import render_offcanvas
+from src.component.nav_sidebar import render_sidebar
 from src.component import ids
 
 # figure templates
@@ -19,34 +20,14 @@ url_theme2 = dbc.themes.DARKLY
 
 
 def create_layout(app: dash.Dash) -> dbc.Container:
-    sidebar = dbc.Nav(
-        [
-            dbc.NavLink(
-                [
-                    dash.html.Div(page["name"], className="ms-2"),
-                ],
-                href=page["path"],
-                # "exact" to automatically set the active property when the current pathname matches the href
-                active="exact",
-            )
-            for page in dash.page_registry.values()
-        ],
-        vertical=True,
-        pills=True,
-
-        class_name="bg-light",
-    )
-
-
-
     return dbc.Container([
         dbc.Row([
             dbc.Col([render_offcanvas(app)], align="end", width=1),
             dbc.Col([
-                     dash.html.Div("Learn ML in an interactive way",
-                                   style={'fontSize': 50, 'textAlign': 'center'}),
-                     ], align="center"),
-            dbc.Col([ThemeSwitchAIO(aio_id="theme", themes=[url_theme1, url_theme2])], align="end", width=1 ),
+                dash.html.Div("Learn ML in an interactive way",
+                              style={'fontSize': 50, 'textAlign': 'center'}),
+            ], align="center"),
+            dbc.Col([ThemeSwitchAIO(aio_id="theme", themes=[url_theme1, url_theme2])], align="end", width=1),
 
         ], justify="evenly"),
 
@@ -56,7 +37,7 @@ def create_layout(app: dash.Dash) -> dbc.Container:
             [
                 dbc.Col(
                     [
-                        sidebar
+                        render_sidebar(app)
                     ], xs=4, sm=4, md=2, lg=2, xl=2, xxl=2),
 
                 dbc.Col(
