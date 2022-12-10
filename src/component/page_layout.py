@@ -7,10 +7,7 @@ from dash import Dash, html
 import dash_bootstrap_components as dbc
 
 
-def create_page_layout() -> dbc.Container:
-    learn_tab = html.Div("Learn Tab")
-
-    play_tab = html.Div("Play Tab")
+def create_page_layout(learn_tab: dbc.Container, play_tab: dbc.Container) -> dbc.Container:
 
     tabs = dbc.Tabs(
         [
