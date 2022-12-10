@@ -5,3 +5,4 @@
 
 # off_canvas component
 ABOUT_ME="about_me"
+OFFCANVAS_SCROLLABLE="offcanvas_scrollable"
