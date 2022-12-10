@@ -65,12 +65,12 @@ def create_layout(app: dash.Dash) -> dbc.Container:
 
     return dbc.Container([
         dbc.Row([
-            dbc.Col([offcanvas], align="end"),
+            dbc.Col([offcanvas], align="end", width=1),
             dbc.Col([
                      dash.html.Div("Learn ML in an interactive way",
                                    style={'fontSize': 50, 'textAlign': 'center'}),
                      ], align="center"),
-            dbc.Col([ThemeSwitchAIO(aio_id="theme", themes=[url_theme1, url_theme2])], align="end"),
+            dbc.Col([ThemeSwitchAIO(aio_id="theme", themes=[url_theme1, url_theme2])], align="end", width=1 ),
 
         ], justify="evenly"),
 
