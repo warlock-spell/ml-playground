@@ -11,11 +11,11 @@ from src.component.nav_sidebar import render_sidebar
 from src.component import ids
 
 # figure templates
-template_theme1 = "sketchy"
+template_theme1 = "flatly"
 template_theme2 = "cyborg"
 
 # themes
-url_theme1 = dbc.themes.SKETCHY
+url_theme1 = dbc.themes.FLATLY
 url_theme2 = dbc.themes.DARKLY
 
 
