@@ -7,4 +7,5 @@ order = {
     "home": 0,
     "linear_regression_page": 1,
     "knn_page": 2,
+    "svm_page": 3,
 }
