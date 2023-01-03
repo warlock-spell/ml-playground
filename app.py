@@ -11,6 +11,7 @@ import dash_bootstrap_components as dbc
 
 def main() -> None:
     app = Dash(__name__, use_pages=True, external_stylesheets=[url_theme1])
+    server = app.server
     app.title = "Learn ML"
     app.layout = create_layout(app)
     app.run(debug=False)
