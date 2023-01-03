@@ -9,13 +9,10 @@ from src.component.main_layout import create_layout, url_theme1
 import dash_bootstrap_components as dbc
 
 
-def main() -> None:
-    app = Dash(__name__, use_pages=True, external_stylesheets=[url_theme1])
-    server = app.server
-    app.title = "Learn ML"
-    app.layout = create_layout(app)
-    app.run(debug=False)
 
+app = Dash(__name__, use_pages=True, external_stylesheets=[url_theme1])
+server = app.server
+app.title = "Learn ML"
+app.layout = create_layout(app)
+app.run(debug=False)
 
-if __name__ == "__main__":
-    main()
