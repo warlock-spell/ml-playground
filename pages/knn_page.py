@@ -7,13 +7,13 @@ import dash
 from dash import dcc, html, callback, Output, Input
 from src.component.page_layout import create_page_layout
 import dash_bootstrap_components as dbc
-from src.component.page_order import order
+from src.component.page_order import page_order
 import numpy as np
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 import plotly.express as px
 
-dash.register_page(__name__, title="Knn", name="Knn", order=order["knn_page"])
+dash.register_page(__name__, title="Knn", name="Knn", order=page_order["knn_page"])
 learn = dbc.Container("Hello")
 
 # load dataset

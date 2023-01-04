@@ -5,8 +5,8 @@
 
 import dash
 from dash import dcc, html
-from src.component.page_order import order
+from src.component.page_order import page_order
 
-dash.register_page(__name__, path='/', order=order["home"])
+dash.register_page(__name__, path='/', order=page_order["home"])
 
 layout = html.Div("Home")

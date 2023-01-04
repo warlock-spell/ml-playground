@@ -8,9 +8,9 @@ from dash import dcc, html, callback, Output, Input
 import plotly.express as px
 from src.component.page_layout import create_page_layout
 import dash_bootstrap_components as dbc
-from src.component.page_order import order
+from src.component.page_order import page_order
 
-dash.register_page(__name__, title="Linear Regression", name="Linear Regression", order=["linear_regression_page"])
+dash.register_page(__name__, title="Linear Regression", name="Linear Regression", order=page_order["linear_regression_page"])
 df = px.data.tips()
 learn = dbc.Container("""Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu arcu quis justo convallis tincidunt. Curabitur a orci eu nulla dapibus vehicula. Nullam semper orci non metus pharetra tincidunt. Donec iaculis vel justo quis auctor. Fusce in rutrum elit, et malesuada ex. Integer ut faucibus nisl. Phasellus convallis dolor id velit mollis ornare. Donec pharetra diam ac est laoreet rutrum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec euismod quis dui non gravida. Nullam quis diam accumsan, lobortis tellus at, pellentesque justo.
 

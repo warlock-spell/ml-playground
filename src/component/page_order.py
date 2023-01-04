@@ -3,9 +3,9 @@
 # @Author:      Daksh
 # @Time:        10-12-2022 06:01 pm
 
-order = {
+page_order = {
     "home": 0,
-    "linear_regression_page": 1,
-    "knn_page": 2,
-    "svm_page": 3,
+    "linear_regression_page": 10,
+    "knn_page": 20,
+    "svm_page": 30,
 }
