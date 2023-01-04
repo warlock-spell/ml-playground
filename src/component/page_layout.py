@@ -13,9 +13,9 @@ def create_page_layout(learn_tab: dbc.Container, play_tab: dbc.Container) -> dbc
         [
             dbc.Tab(learn_tab, label="Learn"),
             dbc.Tab(play_tab, label="Play"),
-            dbc.Tab(
-                "open for extension", label="extend", disabled=True
-            ),
+            # dbc.Tab(
+            #     "open for extension", label="extend", disabled=True
+            # ),
         ]
     )
 
