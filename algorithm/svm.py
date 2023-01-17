@@ -5,6 +5,7 @@
 
 import numpy as np
 
+
 class SVM:
 
     def __init__(self, lr: float = 0.001, n_iters: int = 1000, lambda_parameter: float = 0.01) -> None:
@@ -31,12 +32,10 @@ class SVM:
             for index, x_i in enumerate(train):
                 condition = train_labels_updated[index] * (np.dot(x_i, self.w) - self.b) >= 1
                 if condition:
-                    self.w -= self.lr * (2*self.lambda_parameter * self.w)
+                    self.w -= self.lr * (2 * self.lambda_parameter * self.w)
                 else:
-                    self.w -= self.lr * (2*self.lambda_parameter * self.w - np.dot(x_i, train_labels_updated[index]))
+                    self.w -= self.lr * (2 * self.lambda_parameter * self.w - np.dot(x_i, train_labels_updated[index]))
                     self.b -= self.lr * train_labels_updated[index]
-
-        pass
 
     def predict(self, test):
         linear_output = np.dot(test, self.w) - self.b
