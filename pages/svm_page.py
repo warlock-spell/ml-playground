@@ -11,6 +11,7 @@ from src.component.page_order import page_order
 import numpy as np
 from sklearn import datasets
 from algorithm.svm import SVM
+from src.component import ids
 from sklearn.model_selection import train_test_split
 import plotly.express as px
 
@@ -29,7 +30,7 @@ select_sample_size = html.Div(
                 {"label": "Sample size: 150", "value": 150},
             ],
             value=50,
-            id="svm-select-sample-size",
+            id=ids.SVM_SELECT_SAMPLE_SIZE,
             inline=True,
         ),
     ]
@@ -45,7 +46,7 @@ select_features = html.Div(
                 {"label": "No of features: 3 (coming soon!)", "value": 3, "disabled": True},
             ],
             value=2,
-            id="svm-select-no-of-features",
+            id=ids.SVM_SELECT_NO_OF_FEATURES,
             inline=True,
         ),
     ]
@@ -57,7 +58,7 @@ select_mean = html.Div(
         dbc.Label("Choose Mean of the Dataset(To be generated)"),
         dcc.Slider(-5, 5, 1,
                    value=1,
-                   id='svm-select-mean-slider'
+                   id=ids.SVM_SELECT_MEAN,
                    ),
     ])
 
@@ -67,9 +68,15 @@ select_sd = html.Div(
         dbc.Label("Choose Standard deviation of the Dataset(To be generated)"),
         dcc.Slider(1, 3, 0.2,
                    value=1,
-                   id='svm-select-mean-slider'
+                   id=ids.SVM_SELECT_SD
                    ),
     ])
+
+
+# figure
+
+def visualize_svm():
+    pass
 
 X, y = datasets.make_blobs(n_samples=50, n_features=2, centers=2, cluster_std=1.05, random_state=40)
 y = np.where(y == 0, -1, 1)
