@@ -26,6 +26,7 @@ learn = dbc.Container([dcc.Markdown(content, dangerously_allow_html=True, mathja
 
 # select sample size
 select_sample_size = html.Div([
+    dbc.Label("Select Sample Size"),
     dbc.RadioItems(id=ids.LR_SELECT_SAMPLE_SIZE,
                    options=[
                        {'Size': '50', 'value': 50},
@@ -33,30 +34,35 @@ select_sample_size = html.Div([
                        {'Size': '150', 'value': 150},
                        {'Size': '200', 'value': 200},
                    ],
-                   value=100, inline=True)])
+                   value=100, inline=True)],
+    )
 
 NUMBER_OF_FEATURES = 1
 
 # select noise
 select_noise = html.Div([
+dbc.Label("Select noise for the Dataset(To be generated)"),
     dbc.RadioItems(id=ids.LR_SELECT_NOISE,
                    options=[
                        {'Noise': '10', 'value': 10},
                        {'Noise': '20', 'value': 20},
                        {'Noise': '30', 'value': 30},
                    ],
-                   value=20, inline=True)])
+                   value=20, inline=True), html.Br()],
+    )
 
 # select random state
-select_random_state = html.Div(
-    [dbc.RadioItems(id=ids.LR_SELECT_RANDOM_STATE,
+select_random_state = html.Div([
+dbc.Label("Select random state for the Dataset(To be generated)"),
+    dbc.RadioItems(id=ids.LR_SELECT_RANDOM_STATE,
                     options=[
                         {'Random State': '1', 'value': 1},
                         {'Random State': '2', 'value': 2},
                         {'Random State': '3', 'value': 3},
                         {'Random State': '4', 'value': 4},
                     ],
-                    value=4, inline=True)])
+                    value=4, inline=True), html.Br()],
+    )
 
 # select test size
 select_test_size = html.Div(
@@ -65,12 +71,15 @@ select_test_size = html.Div(
         dcc.Slider(0.05, 0.3, 0.05,
                    value=0.2,
                    id=ids.LR_SELECT_TEST_SIZE,
-                   ),
-    ])
+                   ), html.Br()
+    ],
+    )
 
 # select learning rate - alpha
 select_alpha = html.Div(
-    [dbc.RadioItems(id=ids.LR_SELECT_ALPHA,
+    [
+dbc.Label("Select Learning Rate of the model"),
+        dbc.RadioItems(id=ids.LR_SELECT_ALPHA,
                     options=[
                         {'Learning Rate': '0.0001', 'value': 0.0001},
                         {'Learning Rate': '0.001', 'value': 0.001},
@@ -78,22 +87,27 @@ select_alpha = html.Div(
                         {'Learning Rate': '0.01', 'value': 0.01},
                         {'Learning Rate': '0.05', 'value': 0.05},
                     ],
-                    value=0.001, inline=True)])
+                    value=0.001, inline=True), html.Br()],
+    )
 
 # graph component
 # figure
 lr_graph = html.Div([
     dbc.Label("Let's see the results"),
     dcc.Graph(figure={}, id=ids.LR_GRAPH_VIZ),
+html.Br(),
 ])
 
 # error component
 show_error = html.Div(
     [
+        html.P("The Mean Squared Error is:"),
         html.Br(),
         html.P(id=ids.LR_SHOW_ERROR),
+html.Br(),
     ]
 )
+
 
 # dataset creation
 def create_dataset(n_samples, n_features, noise, random_state, test_size):
@@ -109,9 +123,9 @@ def mse(y_true, y_predicted):
     return np.mean((y_true - y_predicted) ** 2)
 
 
-
 @callback(
-    Output(ids.LR_GRAPH_VIZ, "figure"),
+
+    [Output(ids.LR_GRAPH_VIZ, "figure"), Output(ids.LR_SHOW_ERROR, "children")],
     Input(ids.LR_SELECT_SAMPLE_SIZE, "value"),
     Input(ids.LR_SELECT_NOISE, "value"),
     Input(ids.LR_SELECT_RANDOM_STATE, "value"),
@@ -132,6 +146,8 @@ def create_dataset_and_plot(sample_size, noise, random_state, test_size, alpha):
     regressor.fit(X_train, y_train)
     predicted_values = regressor.predict(X_test)
 
+    mse_i_value = mse(y_test, predicted_values)
+
     # plotting logic
     X_test = list(chain(*X_test))
     X = list(chain(*X))
@@ -144,29 +160,10 @@ def create_dataset_and_plot(sample_size, noise, random_state, test_size, alpha):
     # Combine scatter and line data in one figure
     fig = go.Figure(data=[scatter_data, line_data], layout=layout)
 
-    return fig
+    # return fig
+    return fig, mse_i_value
 
 
-# error component
-@callback(
-    Output(ids.LR_SHOW_ERROR, "children"),
-    Input(ids.LR_SELECT_SAMPLE_SIZE, "value"),
-    Input(ids.LR_SELECT_NOISE, "value"),
-    Input(ids.LR_SELECT_RANDOM_STATE, "value"),
-    Input(ids.LR_SELECT_TEST_SIZE, "value"),
-    Input(ids.LR_SELECT_ALPHA, "value"),
-)
-def create_dataset_and_plot(sample_size, noise, random_state, test_size, alpha):
-    X, y, X_train, X_test, y_train, y_test = create_dataset(n_samples=sample_size,
-                                                            n_features=NUMBER_OF_FEATURES,
-                                                            noise=noise,
-                                                            random_state=random_state,
-                                                            test_size=test_size)
-    regressor = LinearRegression(lr=alpha)
-    regressor.fit(X_train, y_train)
-    predicted_values = regressor.predict(X_test)
-    mse_i_value = mse(y_test, predicted_values)
-    return mse_i_value
 
 
 play = dbc.Container(html.Div(
