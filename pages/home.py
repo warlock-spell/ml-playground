@@ -6,7 +6,9 @@
 import dash
 from dash import dcc, html
 from src.component.page_order import page_order
+from content.home import content
+import dash_bootstrap_components as dbc
 
 dash.register_page(__name__, path='/', order=page_order["home"])
 
-layout = html.Div("Home")
+layout = html.Div(dbc.Container([dcc.Markdown(content, dangerously_allow_html=True, mathjax=True)]))
