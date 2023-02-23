@@ -12,9 +12,11 @@ import numpy as np
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 import plotly.express as px
+from content.knn import content
 
 dash.register_page(__name__, title="Knn", name="Knn", order=page_order["knn_page"])
-learn = dbc.Container("Hello")
+
+learn = dbc.Container([dcc.Markdown(content, dangerously_allow_html=True, mathjax=True)])
 
 # load dataset
 iris = datasets.load_iris()
