@@ -41,4 +41,40 @@ Linear regression can be applied in different settings, including simple linear 
 
 Overall, linear regression is a powerful and widely used algorithm in the field of machine learning and data science for predictive modeling and inference.
 
+#### Code
+
+The code is written just using numpy, although there are libraries like scikit-learn which can be used to perform linear regression. But when you are learning, it is better to write the code yourself, so that you can understand the inner workings of the algorithm.
+
+```python
+
+import numpy as np
+
+
+class LinearRegression:
+    def __init__(self, lr: float = 0.001, n_iters: int = 1000) -> None:
+        self.lr = lr
+        self.n_iters = n_iters
+        self.weights = None
+        self.bias = None
+
+    def fit(self, train, train_labels):
+        # initialize parameters
+        n_samples, n_features = train.shape
+        self.weights = np.zeros(n_features)
+        self.bias = 0
+
+        for _ in range(self.n_iters):
+            y_predicted = np.dot(train, self.weights) + self.bias
+
+            dw = (1 / n_samples) * np.dot(train.T, (y_predicted - train_labels))
+            db = (1 / n_samples) * np.sum(y_predicted - train_labels)
+
+            self.weights -= self.lr * dw
+            self.bias -= self.lr * db
+
+    def predict(self, test):
+        y_predicted = np.dot(test, self.weights) + self.bias
+        return y_predicted
+```
+
 """
