@@ -11,7 +11,7 @@ from src.component.page_order import page_order
 import numpy as np
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
-from src.content.knn import content
+from content import content
 import plotly.graph_objects as go
 from src.component import ids
 from algorithm.knn import KNN

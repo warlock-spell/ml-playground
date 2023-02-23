@@ -14,7 +14,7 @@ from algorithm.svm import SVM
 from src.component import ids
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from src.content import content
+from content import content
 
 dash.register_page(__name__, title="SVM", name="SVM", order=page_order["svm_page"])
 learn = dbc.Container([dcc.Markdown(content, dangerously_allow_html=True, mathjax=True)])

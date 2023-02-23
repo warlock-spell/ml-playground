@@ -6,7 +6,7 @@
 import dash
 from dash import dcc, html
 from src.component.page_order import page_order
-from src.content.home import content
+from content.home import content
 import dash_bootstrap_components as dbc
 
 dash.register_page(__name__, path='/', order=page_order["home"])

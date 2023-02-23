@@ -8,7 +8,7 @@ from dash import dcc, html, callback, Output, Input
 from src.component.page_layout import create_page_layout
 import dash_bootstrap_components as dbc
 from src.component.page_order import page_order
-from src.content.linear_regression import content
+from content import content
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from src.component import ids
