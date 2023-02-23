@@ -44,7 +44,7 @@ SVM is a powerful algorithm that can handle complex classification and regressio
 
 #### Code
 
-The code is written just using numpy, although there are libraries like scikit-learn which can be used to perform linear regression. But when you are learning, it is better to write the code yourself, so that you can understand the inner workings of the algorithm.
+The code is written just using numpy, although there are libraries like scikit-learn which can be used to perform svm. But when you are learning, it is better to write the code yourself, so that you can understand the inner workings of the algorithm.
 
 ```python
 import numpy as np

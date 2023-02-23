@@ -40,7 +40,7 @@ KNN is a simple and intuitive algorithm that does not require any assumptions ab
 
 #### Code
 
-The code is written just using numpy, although there are libraries like scikit-learn which can be used to perform linear regression. But when you are learning, it is better to write the code yourself, so that you can understand the inner workings of the algorithm.
+The code is written just using numpy, although there are libraries like scikit-learn which can be used to perform knn. But when you are learning, it is better to write the code yourself, so that you can understand the inner workings of the algorithm.
 
 ```python
 import numpy as np

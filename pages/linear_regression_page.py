@@ -5,14 +5,12 @@
 
 import dash
 from dash import dcc, html, callback, Output, Input
-import plotly.express as px
 from src.component.page_layout import create_page_layout
 import dash_bootstrap_components as dbc
 from src.component.page_order import page_order
-from content.linear_regression import content
+from src.content.linear_regression import content
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
-from plotly.subplots import make_subplots
 from src.component import ids
 import plotly.graph_objects as go
 import numpy as np
