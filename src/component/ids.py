@@ -16,10 +16,15 @@ SVM_GRAPH_VIZ = "svm_graph_viz"
 SVM_GRAPH_DATA = "svm_graph_data"
 
 # Linear Regression Page
-LR_SELECT_SAMPLE_SIZE = "select-sample-size-linear-regression"
-LR_SELECT_NOISE = "select-noise-linear-regression"
-LR_SELECT_RANDOM_STATE = "select-random-state-linear-regression"
-LR_SELECT_TEST_SIZE = "select-test-size-linear-regression"
-LR_SELECT_ALPHA = "select-alpha-linear-regression"
-LR_GRAPH_VIZ = "linear-regression-graph"
-LR_SHOW_ERROR = "show-error-linear-regression"
+LR_SELECT_SAMPLE_SIZE = "linear_regression_select_sample_size"
+LR_SELECT_NOISE = "linear_regression_select_noise"
+LR_SELECT_RANDOM_STATE = "linear_regression_select_random_state"
+LR_SELECT_TEST_SIZE = "linear_regression_select_test_size"
+LR_SELECT_ALPHA = "linear_regression_select_alpha"
+LR_GRAPH_VIZ = "linear_regression_graph"
+LR_SHOW_ERROR = "linear_regression_show_error"
+
+# KNN Page
+KNN_SELECT_TEST_SIZE = "knn_test_percent"
+KNN_SELECT_K_VALUE = "knn_select_k"
+KNN_GRAPH_VIZ = "knn_graph"
