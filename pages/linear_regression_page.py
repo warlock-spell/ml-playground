@@ -27,42 +27,44 @@ learn = dbc.Container([dcc.Markdown(content, dangerously_allow_html=True, mathja
 # select sample size
 select_sample_size = html.Div([
     dbc.Label("Select Sample Size"),
-    dbc.RadioItems(id=ids.LR_SELECT_SAMPLE_SIZE,
-                   options=[
-                       {'Size': '50', 'value': 50},
-                       {'Size': '100', 'value': 100},
-                       {'Size': '150', 'value': 150},
-                       {'Size': '200', 'value': 200},
-                   ],
-                   value=100, inline=True)],
-    )
+    dbc.RadioItems(
+        options=[
+            {"label":'Size: 50', 'value': 50},
+            {"label":'Size: 100', 'value': 100},
+            {"label":'Size: 150', 'value': 150},
+            {"label":'Size: 200', 'value': 200},
+        ],
+        id=ids.LR_SELECT_SAMPLE_SIZE,
+        value=100,
+        inline=True)],
+)
 
 NUMBER_OF_FEATURES = 1
 
 # select noise
 select_noise = html.Div([
-dbc.Label("Select noise for the Dataset(To be generated)"),
+    dbc.Label("Select noise for the Dataset(To be generated)"),
     dbc.RadioItems(id=ids.LR_SELECT_NOISE,
                    options=[
-                       {'Noise': '10', 'value': 10},
-                       {'Noise': '20', 'value': 20},
-                       {'Noise': '30', 'value': 30},
+                       {"label":'Noise: 10', 'value': 10},
+                       {"label":'Noise: 20', 'value': 20},
+                       {"label":'Noise: 30', 'value': 30},
                    ],
                    value=20, inline=True), html.Br()],
-    )
+)
 
 # select random state
 select_random_state = html.Div([
-dbc.Label("Select random state for the Dataset(To be generated)"),
+    dbc.Label("Select random state for the Dataset(To be generated)"),
     dbc.RadioItems(id=ids.LR_SELECT_RANDOM_STATE,
-                    options=[
-                        {'Random State': '1', 'value': 1},
-                        {'Random State': '2', 'value': 2},
-                        {'Random State': '3', 'value': 3},
-                        {'Random State': '4', 'value': 4},
-                    ],
-                    value=4, inline=True), html.Br()],
-    )
+                   options=[
+                       {"label":'Random State: 1', 'value': 1},
+                       {"label":'Random State: 2', 'value': 2},
+                       {"label":'Random State: 3', 'value': 3},
+                       {"label":'Random State: 4', 'value': 4},
+                   ],
+                   value=4, inline=True), html.Br()],
+)
 
 # select test size
 select_test_size = html.Div(
@@ -73,29 +75,29 @@ select_test_size = html.Div(
                    id=ids.LR_SELECT_TEST_SIZE,
                    ), html.Br()
     ],
-    )
+)
 
 # select learning rate - alpha
 select_alpha = html.Div(
     [
-dbc.Label("Select Learning Rate of the model"),
+        dbc.Label("Select Learning Rate of the model"),
         dbc.RadioItems(id=ids.LR_SELECT_ALPHA,
-                    options=[
-                        {'Learning Rate': '0.0001', 'value': 0.0001},
-                        {'Learning Rate': '0.001', 'value': 0.001},
-                        {'Learning Rate': '0.005', 'value': 0.005},
-                        {'Learning Rate': '0.01', 'value': 0.01},
-                        {'Learning Rate': '0.05', 'value': 0.05},
-                    ],
-                    value=0.001, inline=True), html.Br()],
-    )
+                       options=[
+                           {"label":'Learning Rate: 0.0001', 'value': 0.0001},
+                           {"label":'Learning Rate: 0.001', 'value': 0.001},
+                           {"label":'Learning Rate: 0.005', 'value': 0.005},
+                           {"label":'Learning Rate: 0.01', 'value': 0.01},
+                           {"label":'Learning Rate: 0.05', 'value': 0.05},
+                       ],
+                       value=0.001, inline=True), html.Br()],
+)
 
 # graph component
 # figure
 lr_graph = html.Div([
     dbc.Label("Let's see the results"),
     dcc.Graph(figure={}, id=ids.LR_GRAPH_VIZ),
-html.Br(),
+    html.Br(),
 ])
 
 # error component
@@ -104,7 +106,7 @@ show_error = html.Div(
         html.P("The Mean Squared Error is:"),
         html.Br(),
         html.P(id=ids.LR_SHOW_ERROR),
-html.Br(),
+        html.Br(),
     ]
 )
 
@@ -162,8 +164,6 @@ def create_dataset_and_plot(sample_size, noise, random_state, test_size, alpha):
 
     # return fig
     return fig, mse_i_value
-
-
 
 
 play = dbc.Container(html.Div(
