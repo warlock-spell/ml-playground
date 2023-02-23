@@ -166,21 +166,9 @@ def create_dataset(sample_size, features, mean, sd):
     return X, y, clf, df
 
 
-@callback(
-    Output(ids.SVM_GRAPH_DATA, "figure"),
-    Input(ids.SVM_SELECT_SAMPLE_SIZE, "value"),
-    Input(ids.SVM_SELECT_NO_OF_FEATURES, "value"),
-    Input(ids.SVM_SELECT_MEAN, "value"),
-    Input(ids.SVM_SELECT_SD, "value"),
-)
-def plot_dataset(sample_size, features, mean, sd):
-    X, y, clf, df = create_dataset(sample_size, features, mean, sd)
-    figure = make_scatter_dataset(X, df)
-    return figure
-
 
 @callback(
-    Output(ids.SVM_GRAPH_VIZ, "figure"),
+    [Output(ids.SVM_GRAPH_VIZ, "figure"),Output(ids.SVM_GRAPH_DATA, "figure")],
     Input(ids.SVM_SELECT_SAMPLE_SIZE, "value"),
     Input(ids.SVM_SELECT_NO_OF_FEATURES, "value"),
     Input(ids.SVM_SELECT_MEAN, "value"),
@@ -191,8 +179,9 @@ def create_dataset_and_plot(sample_size, features, mean, sd):
     # print(sample_size, features, mean, sd)
     X, y, clf, df = create_dataset(sample_size, features, mean, sd)
     all_coordinates = get_coordinates(X, clf)
-    figure = make_scatter_results(X, df, all_coordinates)
-    return figure
+    dataset_figure = make_scatter_dataset(X, df)
+    results_figure = make_scatter_results(X, df, all_coordinates)
+    return results_figure, dataset_figure
 
 
 play = dbc.Container(html.Div([
