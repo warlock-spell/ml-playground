@@ -152,6 +152,20 @@ def get_coordinates(X, clf):
     return [x0_1, x0_2, x1_1, x1_2, x1_1_m, x1_2_m, x1_1_p, x1_2_p, x1_min, x1_max]
 
 
+def create_dataset(sample_size, features, mean, sd):
+    X, y = datasets.make_blobs(n_samples=sample_size, n_features=features, centers=mean, cluster_std=sd,
+                               random_state=40)
+    y = np.where(y == 0, -1, 1)
+    clf = SVM()
+    clf.fit(X, y)
+    df = {
+        'a': X[:, 0],
+        'b': X[:, 1],
+        'group': y
+    }
+    return X, y, clf, df
+
+
 @callback(
     Output(ids.SVM_GRAPH_DATA, "figure"),
     Input(ids.SVM_SELECT_SAMPLE_SIZE, "value"),
@@ -160,18 +174,7 @@ def get_coordinates(X, clf):
     Input(ids.SVM_SELECT_SD, "value"),
 )
 def plot_dataset(sample_size, features, mean, sd):
-    X, y = datasets.make_blobs(n_samples=sample_size, n_features=features, centers=mean, cluster_std=sd,
-                               random_state=40)
-    y = np.where(y == 0, -1, 1)
-
-    clf = SVM()
-    clf.fit(X, y)
-
-    df = {
-        'a': X[:, 0],
-        'b': X[:, 1],
-        'group': y
-    }
+    X, y, clf, df = create_dataset(sample_size, features, mean, sd)
     figure = make_scatter_dataset(X, df)
     return figure
 
@@ -186,21 +189,8 @@ def plot_dataset(sample_size, features, mean, sd):
 # the arguments in the function are received sequentially from callback
 def create_dataset_and_plot(sample_size, features, mean, sd):
     # print(sample_size, features, mean, sd)
-    X, y = datasets.make_blobs(n_samples=sample_size, n_features=features, centers=mean, cluster_std=sd,
-                               random_state=40)
-    y = np.where(y == 0, -1, 1)
-
-    clf = SVM()
-    clf.fit(X, y)
-
-    df = {
-        'a': X[:, 0],
-        'b': X[:, 1],
-        'group': y
-    }
-
+    X, y, clf, df = create_dataset(sample_size, features, mean, sd)
     all_coordinates = get_coordinates(X, clf)
-
     figure = make_scatter_results(X, df, all_coordinates)
     return figure
 
